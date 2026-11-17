@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#07031a"><link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg">
-<title>GLASS//FIT v6 · AR 안경 가상 피팅</title>
+<meta name="theme-color" content="#07031a"><link rel="manifest" href="../manifest.json"><link rel="icon" href="../favicon.ico" type="image/x-icon"><link rel="icon" href="../icon-192.png" type="image/png" sizes="192x192"><link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png"><meta name="apple-mobile-web-app-title" content="GLASS//FIT">
+<title>GLASS//FIT · AR 안경 가상 피팅</title>
 <style>
 :root{--bg:#07031a;--ink:#ece8ff;--mut:#a39cd6;--pu:#b44cff;--bl:#3d7bff;--pk:#ff2bd6;--cy:#19e3ff;--ar:9/16;--arn:.5625;--res:200px;--gx:50%;--gy:50%;--rx:0deg;--ry:0deg;color-scheme:dark}
 *{box-sizing:border-box;scrollbar-width:thin;scrollbar-color:var(--pu) rgba(255,255,255,.08)}
@@ -40,7 +40,7 @@ input,select{min-width:0}.fiform input{width:100%}.row select{flex:1 1 150px}
 .frame{position:relative;width:min(100%,calc((100svh - var(--res))*var(--arn)),1100px);min-width:min(100%,220px);aspect-ratio:var(--ar);border-radius:20px;overflow:hidden;background:linear-gradient(160deg,#2a0f6a,#06204f);transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .15s ease-out;box-shadow:0 0 0 1px rgba(255,43,214,.55),0 0 26px rgba(255,43,214,.45),0 0 70px rgba(25,227,255,.28);animation:glow 5s ease-in-out infinite}
 @keyframes glow{50%{box-shadow:0 0 0 1px rgba(25,227,255,.6),0 0 30px rgba(25,227,255,.5),0 0 70px rgba(255,43,214,.3)}}
 .frame::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;background:radial-gradient(240px 240px at var(--gx) var(--gy),rgba(255,255,255,.16),transparent 70%)}
-#view{position:absolute;inset:0}#view{transform:scale(var(--person-zoom,1));transform-origin:center center}#view.mir{transform:scaleX(-1) scale(var(--person-zoom,1))}
+#view{position:absolute;inset:0}#view.mir{transform:scaleX(-1)}
 #cam,#cv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .hud{position:absolute;top:10px;left:10px;z-index:5;padding:6px 10px;border-radius:12px;background:rgba(10,5,40,.65);border:1px solid rgba(25,227,255,.5);font-size:13px;max-width:calc(100% - 20px)}
 .hud b{color:#ffd3f6}.hud span{color:var(--cy);margin-left:6px}
@@ -53,19 +53,9 @@ input,select{min-width:0}.fiform input{width:100%}.row select{flex:1 1 150px}
 .th canvas{width:86%;height:auto;pointer-events:none;filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
 .th[aria-pressed=true]{transform:scale(1.1);box-shadow:0 0 0 3px #07031a,0 0 0 6px var(--cy),0 0 22px var(--pk)}
 .cap{text-align:center;color:#ffd3f6;font-size:14px;min-height:22px}
-.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:8px}
-.swb{min-height:70px;border-radius:13px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);font-size:11px;cursor:pointer;display:grid;grid-template-rows:42px auto;align-content:center;justify-items:center;gap:3px;padding:5px 3px;color:var(--ink);font:inherit}
+.sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(46px,1fr));gap:8px}
+.swb{aspect-ratio:1;min-height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);font-size:22px;cursor:pointer;display:grid;place-items:center;padding:0;color:var(--ink)}
 .swb[aria-checked=true]{border-color:var(--cy);box-shadow:0 0 0 2px var(--cy),0 0 16px var(--pk);background:rgba(255,43,214,.2)}
-.swb small{font-size:10px;line-height:1.1;color:var(--ink);white-space:normal;text-align:center}
-.color-mascot{--mascot:#888;position:relative;display:block;width:38px;height:38px;border-radius:46% 46% 43% 43%;background:var(--mascot);border:2px solid rgba(255,255,255,.82);box-shadow:inset -3px -4px 0 rgba(0,0,0,.14),0 2px 5px rgba(0,0,0,.25)}
-.color-mascot::before,.color-mascot::after{content:"";position:absolute;top:14px;width:4px;height:5px;border-radius:50%;background:#251b2b}
-.color-mascot::before{left:10px}.color-mascot::after{right:10px}
-.color-mascot b{position:absolute;left:50%;top:23px;width:9px;height:5px;border-bottom:2px solid #513047;border-radius:0 0 9px 9px;transform:translateX(-50%)}
-.color-mascot em{position:absolute;top:21px;left:5px;width:5px;height:4px;border-radius:50%;background:rgba(255,105,145,.75);box-shadow:22px 0 rgba(255,105,145,.75)}
-.color-mascot.is-clear{background:linear-gradient(135deg,#fff,#cceeff 55%,#f6eaff);border-color:#d5e8ff}
-.fit-y-scale{display:flex;justify-content:space-between;color:var(--mut);font-size:11px;margin:0 2px -3px}
-@media (pointer:coarse){.swb{min-height:76px}.color-mascot{width:40px;height:40px}}
-.manual-field{display:grid;grid-template-columns:1fr auto;gap:3px 10px;margin-top:10px;color:var(--ink)}.manual-field input{grid-column:1/-1}#fitPartSeg button{flex:1 1 88px;padding:6px 5px}#fitPartName{font-weight:700;color:var(--cy)}
 .zoom{display:grid;grid-template-columns:auto 1fr auto auto;gap:8px;align-items:center}.zoom output{min-width:52px;text-align:center;color:var(--cy)}
 input[type=range]{width:100%;min-height:32px;accent-color:var(--pk)}
 .filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:6px}.filters select{width:100%}
@@ -101,154 +91,10 @@ ol{margin:6px 0 0;padding-left:20px;color:var(--mut);font-size:13px}
 :root .col-stage{position:sticky;top:6px;max-height:calc(100svh - 12px);overflow-y:auto;--res:70px}:root .panels{grid-template-columns:1fr}}
 @media (max-width:420px){h1{font-size:19px}.card{padding:12px}.big{font-size:26px}}
 @media (prefers-reduced-motion:reduce){.frame{animation:none;transition:none}}
-
-/* v9: compact independent vertical adjustments, touch-friendly with uncramped labels */
-#fitPartSeg{gap:4px!important}
-#fitPartSeg button{min-height:36px!important;padding:5px 5px!important;font-size:12px!important;line-height:1.25}
-#fitY{min-height:28px;max-height:32px;margin:0}
-#fitYOut,#templeAngleOut,#templeVerticalOut{font-size:12px;color:var(--cy);font-weight:700;min-width:40px;text-align:right}
-#fitYReset,#fitYUp,#fitYDown{min-height:32px;padding:5px 7px;font-size:11px;flex:1 1 auto}
-.temple-compact{min-width:0;border:1px solid rgba(25,227,255,.3);border-radius:10px;padding:8px;background:rgba(0,0,0,.16);display:grid;gap:5px;margin-top:4px}
-.temple-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12.5px;font-weight:600}
-.mini-hint{font-size:11px;color:var(--mut);font-weight:400}
-.temple-slider{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:6px;align-items:center;min-width:0}
-.temple-slider>span{font-size:11px;color:var(--mut)}
-.temple-slider input{min-width:0;width:100%;min-height:30px;touch-action:pan-y}
-.temple-reset{min-height:32px!important;padding:5px 8px!important;font-size:11px!important;flex:none!important}
-@media (max-width:430px){.mini-hint{display:none}#fitPartSeg button{font-size:11px!important}.temple-compact{padding:6px}}
-/* v6: two distinct settings sections, compact and touch-friendly */
-.settings-intro{font-size:12px;color:var(--mut);margin:0 0 10px}
-.settings-panel{min-width:0;display:grid;gap:4px;padding:10px;border-radius:14px;border:1px solid rgba(25,227,255,.18);background:rgba(4,5,24,.23)}
-.settings-panel>h3:first-child{margin-top:0}
-.settings-panel>.sw{min-width:0}
-.settings-panel>input[type=range]{display:block;max-width:100%;touch-action:pan-y}
-.frame-settings,.lens-settings{min-width:0;overflow:hidden}
-.railwrap{min-width:0}.rail{scrollbar-width:auto;overscroll-behavior-x:contain;touch-action:pan-x}
-.sw{grid-template-columns:repeat(auto-fit,minmax(65px,1fr))}
-#fitPartSeg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible;border:0;gap:5px}
-#fitPartSeg button{min-width:0;min-height:44px;border:1px solid rgba(25,227,255,.5);border-radius:9px;overflow-wrap:anywhere}
-#fitPartSeg button[aria-pressed=true]{border-color:var(--cy)}
-input[type=range]{min-height:40px;cursor:pointer}
-@media(max-width:680px){
- .app{padding:8px 8px calc(28px + env(safe-area-inset-bottom));gap:10px}
- .col-stage,.panels{gap:10px}
- .card{padding:11px;border-radius:14px}
- .settings-panel{padding:8px}
- .zoom{grid-template-columns:38px minmax(0,1fr) 38px 60px;gap:4px}
- .zoom .btn.sm{padding:5px 2px}
- .row{gap:6px}
- .row>.btn{flex:1 1 100px}
- #fitPartSeg button{padding:5px 2px;font-size:12px}
- .sw{grid-template-columns:repeat(auto-fit,minmax(57px,1fr));gap:6px}
- .swb{min-height:69px;padding:4px 2px}
- .frame{min-width:0}
-}
-@media(orientation:landscape) and (max-height:520px){
- :root .app{grid-template-columns:minmax(0,1fr)}
- :root .col-stage{position:static;max-height:none;overflow:visible}
- :root .panels{grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr))}
- .frame{max-height:70svh;width:auto;max-width:100%}
-}
-@media(min-width:900px){:root:not([data-ar=l]) .col-stage{overscroll-behavior:contain;scrollbar-gutter:stable}}
-
-/* v7: 좌측 80% / 우측 20% PC 레이아웃 */
-@media (min-width:1100px) and (min-height:540px){
- :root .app,:root[data-ar=l] .app,:root:not([data-ar=l]) .app{max-width:none;width:100%;display:grid;grid-template-columns:minmax(0,4fr) minmax(0,1fr);align-items:start;gap:12px;padding:10px 12px 24px;--res:85px}
- :root .col-stage,:root:not([data-ar=l]) .col-stage,:root[data-ar=l] .col-stage{position:sticky;top:8px;max-height:calc(100dvh - 12px);overflow-y:auto;overscroll-behavior:contain;padding:0 4px 12px 0;min-width:0;--res:85px}
- :root .panels,:root[data-ar=l] .panels{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0;max-height:calc(100dvh - 12px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:0 4px 12px 0}
- :root .col-stage .frame{width:min(100%,calc((100dvh - 162px)*var(--arn)));max-width:100%;min-width:0}
- :root .panels .card{padding:12px}
- :root .panels .row>.btn{flex:1 1 100%;min-width:0}
- :root .panels .fiform{grid-template-columns:minmax(0,1fr)}
- :root .panels .filters{grid-template-columns:minmax(0,1fr)}
- :root .panels .seg button{flex-basis:calc(50% - 2px)}
- :root .panels .big{font-size:clamp(20px,2vw,27px)}
-}
-/* 중간 크기의 태블릿은 2열 대신 세로 배치하여 터치 조작성을 확보 */
-@media (min-width:700px) and (max-width:1099px){
- :root .app,:root[data-ar=l] .app{max-width:100%;grid-template-columns:minmax(0,1fr);gap:12px}
- :root .col-stage{position:static;max-height:none;overflow:visible}
- :root .panels,:root[data-ar=l] .panels{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-height:none;overflow:visible}
- :root .col-stage .frame{width:min(100%,760px)}
-}
-@media (max-width:699px){
- :root .app,:root[data-ar=l] .app{width:100%;max-width:100%;display:grid;grid-template-columns:minmax(0,1fr);gap:10px;padding:8px 8px 20px}
- :root .col-stage,:root:not([data-ar=l]) .col-stage{position:static;max-height:none;overflow:visible;padding:0}
- :root .panels,:root[data-ar=l] .panels{grid-template-columns:minmax(0,1fr);max-height:none;overflow:visible}
- :root .frame{width:min(100%,calc((100dvh - 175px)*var(--arn)));min-width:0;max-width:100%;min-height:0}
- .row>.btn{flex:1 1 104px;min-width:0;overflow-wrap:anywhere}
- .card{padding:10px;border-radius:15px}
- .fiform{grid-template-columns:repeat(2,minmax(0,1fr))}
- .zoom{grid-template-columns:auto minmax(0,1fr) auto auto}
- .sw{grid-template-columns:repeat(auto-fill,minmax(58px,1fr))}
-}
-@media (max-width:380px){.fiform{grid-template-columns:minmax(0,1fr)}.row>.btn{flex:1 1 95px}}
-/* 모든 조절 콘텐츠의 가로 넘침 방지 */
-.card,.row,.zoom,.filters,.fiform,.seg,.railwrap{min-width:0;max-width:100%}
-.card input,.card select,.card output{max-width:100%}
-.card button{overflow-wrap:anywhere}
-
-
-/* v11: 실제 세로 조절바. 화면이 좁아도 막대와 동작 버튼을 함께 표시합니다. */
-.temple-vertical-control{display:grid;grid-template-columns:66px minmax(0,1fr);gap:10px;align-items:center;min-width:0;padding:8px 3px}
-.temple-vertical-rail{display:flex;flex-direction:column;gap:4px;align-items:center;justify-content:center;border:1px solid rgba(25,227,255,.32);background:rgba(25,227,255,.045);padding:8px 3px;border-radius:12px;min-height:200px}
-.temple-vertical-rail>span{font-size:11px;color:var(--cy);white-space:nowrap}
-.temple-vertical-rail input[type=range]{writing-mode:vertical-lr;direction:ltr;appearance:auto;-webkit-appearance:slider-vertical;width:32px;height:144px;min-height:144px;max-height:144px;min-width:32px;margin:0;touch-action:none;accent-color:#19e3ff;cursor:ns-resize}
-.temple-vertical-actions{min-width:0;display:grid;gap:8px;align-items:center}
-.temple-vertical-actions .note{margin:0;line-height:1.45}
-.temple-vertical-actions .row{gap:5px}
-.temple-vertical-actions .btn{min-height:34px;padding:5px 7px;font-size:11px;flex:1 1 68px}
-.mini-temple-preview{position:relative;height:55px;min-width:0;max-width:220px;background:linear-gradient(120deg,rgba(35,20,85,.35),rgba(18,54,80,.25));border:1px solid rgba(255,255,255,.12);border-radius:10px}
-.mini-hinge{position:absolute;left:24px;top:24px;width:10px;height:10px;border:2px solid #c0a7ff;background:#6c55ab;border-radius:50%;z-index:2}
-.mini-arm{position:absolute;left:30px;top:28px;width:110px;height:4px;border-radius:4px;background:linear-gradient(90deg,#ff2bd6,#19e3ff);transform-origin:0 50%;transition:transform .09s}
-.mini-ear{position:absolute;right:17px;top:19px;width:22px;height:29px;border:2px solid rgba(255,190,150,.8);border-radius:50%}
-@media(max-width:460px){.temple-vertical-control{grid-template-columns:58px minmax(0,1fr);gap:7px}.temple-vertical-rail{min-height:190px}.temple-vertical-rail input[type=range]{height:130px;min-height:130px;max-height:130px}}
 </style></head>
 <body>
-<!-- GLASS//FIT 접근 인증 잠금 오버레이 시작 -->
-<div id="glassfit-auth-overlay" style="position:fixed; inset:0; z-index:999999; background:#07031a; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; font-family:'Rajdhani','Segoe UI',sans-serif; color:#ece8ff;">
-  <div style="width:100%; max-width:360px; background:rgba(20,12,48,0.95); border:1px solid rgba(180,76,255,0.45); border-radius:20px; padding:32px 24px; text-align:center; box-shadow:0 0 40px rgba(180,76,255,0.2);">
-    <div style="font-size:22px; font-weight:700; letter-spacing:0.22em; margin-bottom:6px; text-shadow:2px 0 #ff2bd6, -2px 0 #3d7bff;">GLASS//FIT</div>
-    <div style="font-size:13px; color:#a39cd6; margin-bottom:24px;">관계자 전용 접근 인증이 필요합니다</div>
-    
-    <input type="password" id="glassfit-pw-input" inputmode="numeric" placeholder="접근 비밀번호 입력" 
-           style="width:100%; box-sizing:border-box; padding:13px 16px; border-radius:12px; border:1px solid rgba(180,76,255,0.5); background:#0d0726; color:#ffffff; font-size:16px; text-align:center; letter-spacing:0.15em; outline:none; margin-bottom:12px;"
-           onkeypress="if(event.key==='Enter') checkGlassFitAuth()">
-           
-    <button onclick="checkGlassFitAuth()" 
-            style="width:100%; padding:13px; border-radius:12px; border:none; background:linear-gradient(90deg, #b44cff, #ff2bd6); color:#ffffff; font-size:15px; font-weight:700; cursor:pointer; letter-spacing:0.08em;">
-      인증 및 시작하기
-    </button>
-    
-    <div id="glassfit-auth-error" style="color:#ff5c8a; font-size:13px; margin-top:12px; min-height:18px;"></div>
-  </div>
-</div>
-
-<script>
-  (function() {
-    if (sessionStorage.getItem('glassfit_unlocked') === 'true') {
-      const overlay = document.getElementById('glassfit-auth-overlay');
-      if (overlay) overlay.style.display = 'none';
-    }
-  })();
-
-  function checkGlassFitAuth() {
-    const input = document.getElementById('glassfit-pw-input').value.trim();
-    const errorEl = document.getElementById('glassfit-auth-error');
-    
-    if (input === '01056315945') {
-      sessionStorage.setItem('glassfit_unlocked', 'true');
-      document.getElementById('glassfit-auth-overlay').style.display = 'none';
-    } else {
-      errorEl.textContent = '비밀번호가 올바르지 않습니다. 다시 확인해 주세요.';
-      document.getElementById('glassfit-pw-input').value = '';
-      document.getElementById('glassfit-pw-input').focus();
-    }
-  }
-</script>
-<!-- GLASS//FIT 접근 인증 잠금 오버레이 끝 -->
 <svg id="sky" viewBox="0 0 1400 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
-<header class="top"><div class="brand"><h1>GLASS<b>//</b>FIT</h1><small>AR 안경 가상 피팅 · v7</small></div>
+<header class="top"><div class="brand"><h1>GLASS<b>//</b>FIT</h1><small>AR 안경 가상 피팅</small></div>
  <div class="pills" aria-label="상태"><span class="pill" id="pAI" data-s="wait">AI 대기</span><span class="pill" id="pCam" data-s="wait">카메라 꺼짐</span><span class="pill" id="pNet">온라인</span></div></header>
 <main class="app" id="app">
 <section class="col-stage" aria-label="피팅 화면">
@@ -261,68 +107,13 @@ input[type=range]{min-height:40px;cursor:pointer}
   </div></div>
   <div class="row" style="margin-top:10px"><button class="btn" id="bFlip">카메라 전환</button><button class="btn" id="bShot">촬영</button><button class="btn" id="bGal">갤러리</button><button class="btn" id="bLive" hidden>실시간</button><button class="btn" id="bAR">비율: 자동</button></div>
  </div>
-  <div class="card"><h2>인물 화면 확대 · 축소</h2>
-   <div class="zoom"><button class="btn sm" id="personMinus" aria-label="인물 축소">−</button><input type="range" id="personZoom" min="60" max="200" step="5" value="100" aria-label="인물 확대 축소"><button class="btn sm" id="personPlus" aria-label="인물 확대">＋</button><button class="btn sm" id="personReset">100%</button></div><div class="cap"><output id="personOut">100%</output></div>
-   <p class="note">카메라 화면과 사진 속 인물을 함께 확대하거나 축소합니다.</p>
-  </div>
-  <div class="card frame-settings" id="frameSettings"><h2>프레임 선택 · 안경테 설정</h2>
-    <div class="settings-intro">안경테의 디자인, 색상, 위치 및 다리를 한 곳에서 조절합니다.</div>
+ <div class="card"><h2>프레임 선택</h2>
   <div class="filters"><select id="fG" aria-label="프레임 모양"></select><select id="fS" aria-label="구조·소재"></select></div>
   <div class="railwrap"><button class="btn arr" id="bPrev" aria-label="이전 프레임">◀</button><div class="rail" id="rail" role="group" aria-label="안경테 목록" tabindex="-1"></div><button class="btn arr" id="bNext" aria-label="다음 프레임">▶</button></div>
   <div class="cap" id="cap">프레임 불러오는 중…</div>
-    <div class="settings-panel" aria-label="안경테 컬러와 위치 조절">
-   <h3>안경테 컬러 선택</h3><div class="sw" id="sw" role="radiogroup" aria-label="프레임 색상"></div><div class="cap" id="swName"></div>
-   <h3>안경테 농도 <output id="frameDensityOut">100%</output></h3><input type="range" id="frameDensity" min="0" max="100" step="1" value="100" aria-label="안경테 농도">
-   <h3>안경 위치 정밀 조절</h3>
-   <div class="row" style="justify-content:space-between;margin-top:10px"><label for="fitY" id="fitPartName">정면부 수직 위치 변경</label><output id="fitYOut">0%</output></div>
-   <div class="fit-y-scale"><span>위로</span><span>기준 위치</span><span>아래로</span></div>
-   <input type="range" id="fitY" min="-20" max="20" step="1" value="0" aria-label="정면부 수직 위치 변경">
-   <div class="row"><button class="btn sm" id="fitYReset">정면부 초기화</button><button class="btn sm" id="fitYUp">위로 1단계</button><button class="btn sm" id="fitYDown">아래로 1단계</button></div>
-   <div class="temple-compact" aria-label="안경 다리 위치 조절">
-     <div class="temple-caption"><label for="templeAngle">다리 위치 각도 변경 <span class="mini-hint">(정면부 경첩에서 시작해 바깥쪽으로 회전)</span></label><output id="templeAngleOut">0°</output></div>
-     <div class="temple-slider"><span>안쪽</span><input type="range" id="templeAngle" min="-35" max="35" step="1" value="0" aria-label="다리 위치 각도 변경"><span>바깥</span><button class="btn sm temple-reset" id="templeAngleReset" type="button">초기화</button></div>
-   </div>
-   <div class="temple-compact" aria-label="안경 다리 수직 위치 조절">
-     <div class="temple-caption"><label for="templeVertical">다리 수직 위치 변경 <span class="mini-hint">(양쪽 안경다리 귀 쪽 높이)</span></label><output id="templeVerticalOut">0%</output></div>
-     <div class="temple-vertical-control">
-       <div class="temple-vertical-rail">
-         <span>▲ 위</span>
-         <input type="range" id="templeVertical" min="-40" max="40" step="1" value="0" aria-label="안경다리 끝부분을 수직으로 움직이는 세로 조절바" aria-valuetext="기본 위치" orient="vertical">
-         <span>▼ 아래</span>
-       </div>
-       <div class="temple-vertical-actions">
-         <div class="mini-temple-preview" aria-hidden="true"><span class="mini-hinge"></span><span class="mini-arm" id="templePreviewArm"></span><span class="mini-ear"></span></div>
-         <p class="note">세로 막대를 위아래로 움직이면 다리의 귀 쪽 끝부분만 이동합니다. 안경 정면부와 경첩은 고정됩니다.</p>
-         <div class="row">
-           <button class="btn sm" id="templeVerticalUp" type="button" aria-label="안경다리 1단계 위로">▲ 위로</button>
-           <button class="btn sm" id="templeVerticalDown" type="button" aria-label="안경다리 1단계 아래로">▼ 아래로</button>
-           <button class="btn sm temple-reset" id="templeVerticalReset" type="button">0% 초기화</button>
-         </div>
-       </div>
-     </div>
-   </div>
-   <p class="note"><b>정면부와 다리의 연결을 우선 보정</b>하도록 구성했습니다. 다리는 항상 정면부 경첩에서 시작하며, <b>다리 위치 각도 변경</b>과 <b>다리 수직 위치 변경</b>으로 귀 방향 쪽 끝부분만 미세 조정합니다.</p>
-   <h3>인터넷 없이 사진 피팅</h3>
-   <div class="row"><button class="btn" id="bManual" type="button">오프라인 수동 피팅</button><button class="btn sm" id="bManualReset" type="button">수동 위치 초기화</button></div>
-   <div id="manualPanel" hidden>
-    <label class="manual-field">안경 좌우 위치 <output id="manualXOut">50%</output><input id="manualX" type="range" min="5" max="95" value="50" step="1"></label>
-    <label class="manual-field">안경 기준 높이 <output id="manualYOut">38%</output><input id="manualY" type="range" min="5" max="90" value="38" step="1"></label>
-    <label class="manual-field">머리 좌우 회전 근사 <output id="manualYawOut">0°</output><input id="manualYaw" type="range" min="-55" max="55" value="0" step="1"></label>
-    <label class="manual-field">안경 폭 <output id="manualWOut">54%</output><input id="manualW" type="range" min="20" max="90" value="54" step="1"></label>
-    <p class="note">갤러리 사진을 연 뒤 사진에서 눈 가운데를 탭하면 안경 위치가 이동합니다. 수동 모드는 얼굴·귀 AI 인식이 아닌 시각적 합성입니다.</p>
-   </div>
-  <h3>귀 위치 추정 · 안경다리</h3>
-  <label class="tog"><input type="checkbox" id="earTrack" checked><span>머리 회전에 따라 귀 걸침점 추정</span></label>
-  <p class="note" id="earStatus">3D 얼굴 좌표를 활용한 귀 위치 추정입니다. 실제 귀 검출 AI 모델과는 다릅니다.</p>
-  <h3>안경테 크기</h3><div class="zoom"><button class="btn sm" id="zMinus" aria-label="축소">−</button><input type="range" id="zm" min="60" max="160" step="5" value="100" aria-label="프레임 크기"><button class="btn sm" id="zPlus" aria-label="확대">＋</button><button class="btn sm" id="zReset">100%</button></div><div class="cap"><output id="zOut">100%</output></div>    </div>
-  </div>
-  <div class="card lens-settings" id="lensSettings"><h2>안경렌즈 컬러 선택</h2>
-    <div class="settings-intro">안경렌즈 색상을 선택하고 농도를 별도로 조절합니다.</div>
-    <div class="settings-panel" aria-label="안경렌즈 컬러와 농도">
-   <h3>안경렌즈 컬러 선택</h3><div class="sw" id="lensSw" role="radiogroup" aria-label="렌즈 색상"></div><div class="cap" id="lensName">무색 투명</div>
-   <h3>안경렌즈 농도 <output id="lensDensityOut">0%</output></h3><input type="range" id="lensDensity" min="0" max="100" step="1" value="0" aria-label="안경렌즈 농도"><p class="note">0%: 투명 / 100%: 진한 색상 (렌즈를 통한 눈이 보이지 않는 시뮬레이션). 실제 렌즈 투과율 측정값과는 다릅니다.</p>
-    </div>
-  </div>
+  <h3>색상</h3><div class="sw" id="sw" role="radiogroup" aria-label="프레임 색상"></div><div class="cap" id="swName"></div>
+  <h3>크기</h3><div class="zoom"><button class="btn sm" id="zMinus" aria-label="축소">−</button><input type="range" id="zm" min="60" max="160" step="5" value="100" aria-label="프레임 크기"><button class="btn sm" id="zPlus" aria-label="확대">＋</button><button class="btn sm" id="zReset">100%</button></div><div class="cap"><output id="zOut">100%</output></div>
+ </div>
 </section>
 <section class="panels" aria-label="분석 및 설정">
  <article class="card" id="results">
@@ -366,14 +157,10 @@ input[type=range]{min-height:40px;cursor:pointer}
 </section>
 </main>
 <input type="file" id="file" accept="image/*" hidden><input type="file" id="galIn" accept="image/*" hidden><input type="file" id="shotIn" accept="image/*" capture="user" hidden>
-<script>
-window.addEventListener('error', e=>{const p=document.getElementById('pAI');if(p){p.textContent='작동 오류: '+(e.message||'초기화 실패');p.dataset.s='err'}const t=document.getElementById('toast');if(t){t.hidden=false;t.textContent='프로그램 오류: '+(e.message||'초기화 실패')+' · 화면을 새로고침하거나 수동 피팅을 사용하세요.'}});
-window.addEventListener('unhandledrejection',e=>{const t=document.getElementById('toast');if(t){t.hidden=false;t.textContent='처리 오류: '+String(e.reason?.message||e.reason||'알 수 없음')}});
-</script>
 <script type="module">
 const $=id=>document.getElementById(id);
 const LSg=(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},SVg=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}};
-if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 let tt=0;function toast(m,ms=3200){const t=$('toast');t.textContent=m;t.hidden=false;clearTimeout(tt);tt=setTimeout(()=>t.hidden=true,ms)}
 const pill=(id,t,s)=>{const e=$(id);e.textContent=t;if(s)e.dataset.s=s};
 /* 배경 도시 스카이라인 */
@@ -430,12 +217,7 @@ const frameURL=f=>FRAME_DATA?FRAME_DATA[f.id]:'frames/'+f.id+'.png';
 const defs=()=>FR.map(f=>({id:f.id,name:f.name,grp:f.grp,st:f.st,k:f.k,tc:f.tc}));
 let items=defs().concat(LSg('gf-mine',[]).filter(x=>x&&x.src)),sel=0,fG='all',fS='all',recG=null;
 let colorKey=LSg('gf-color',null);if(colorKey&&!CK[colorKey])colorKey=null;
-let fitYOffset=Math.max(-20,Math.min(20,+LSg('gf-fit-y-v4',0))),earTrack=LSg('gf-ear-track',true)!==false;
-let templeAngle=Math.max(-35,Math.min(35,+LSg('gf-temple-angle-v10',0)||0));
-let templeVertical=Math.max(-40,Math.min(40,+LSg('gf-temple-vertical-v11',LSg('gf-temple-vertical-v10',0))||0));
-let manualMode=(location.protocol==='file:' || !navigator.onLine),manualFit={x:50,y:38,yaw:0,w:54};
-let frameDensity=Math.max(0,Math.min(100,+LSg('gf-frame-density-v4',100))),lensDensity=Math.max(0,Math.min(100,+LSg('gf-lens-density-v4',0))),lensKey=LSg('gf-lens-color-v4',LSg('gf-lens-color','grey')),personZoom=Math.max(.6,Math.min(2,+LSg('gf-person-zoom',1)||1));
- let zoom=Math.min(1.6,Math.max(.6,+LSg('gf-zoom',1)||1)),arMode=LSg('gf-ar','auto'),lineMode=LSg('gf-lines','all');
+let zoom=Math.min(1.6,Math.max(.6,+LSg('gf-zoom',1)||1)),arMode=LSg('gf-ar','auto'),lineMode=LSg('gf-lines','all');
 if(!['auto','p','l'].includes(arMode))arMode='auto';if(!['all','contour','iris','off'].includes(lineMode))lineMode='all';
 let still=false,stillData=null,GL=null;
 /* 실사 안경 이미지 불러오기 · 색상 바꾸기(밝기 음영은 유지하고 색만 교체) */
@@ -443,71 +225,18 @@ const BASE=new Map(),TINT=new Map();
 const loadImg=u=>new Promise(res=>{const im=new Image();im.onload=()=>res(im);im.onerror=()=>res(null);im.src=u});
 async function ensureBase(it){const key=it.mine?it.src:it.id;if(!BASE.has(key))BASE.set(key,await loadImg(it.mine?it.src:frameURL(it)));return BASE.get(key)}
 const hex2=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
-function tinted(it,base,ck){
- const key=(it.mine?it.src:it.id)+'|'+ck+'|frame-v4';if(TINT.has(key))return TINT.get(key);
- const c=document.createElement('canvas'),Wb=c.width=base.naturalWidth||base.width,Hb=c.height=base.naturalHeight||base.height,g=c.getContext('2d');
- g.drawImage(base,0,0);const d=g.getImageData(0,0,Wb,Hb),p=d.data,col=CK[ck],hist=new Uint32Array(256);let n=0;
- for(let i=0;i<p.length;i+=4)if(p[i+3]>0){hist[Math.round(.2126*p[i]+.7152*p[i+1]+.0722*p[i+2])]++;n++}
- let acc=0,y95=160;for(let v=0;v<256;v++){acc+=hist[v];if(acc>=n*.95){y95=Math.max(v,30);break}}
- const stops=col.g?col.g.map(hex2):null,solid=col.c&&col.c[0]==='#'?hex2(col.c):[210,225,238];
- for(let y=0,i=0;y<Hb;y++)for(let x=0;x<Wb;x++,i+=4){
-   const a=p[i+3];if(!a)continue;
-   const Y=.2126*p[i]+.7152*p[i+1]+.0722*p[i+2],shade=.58+.55*Math.min(1.25,Y/y95);
-   let target=solid;
-   if(stops){const u=Math.min(.999,(x/Wb*.72+y/Hb*.28))*(stops.length-1),j=u|0,q=u-j;target=[0,1,2].map(k=>stops[j][k]*(1-q)+stops[Math.min(j+1,stops.length-1)][k]*q)}
-   const strength=col.cl ? 0.72 : 0.92;
-   for(let k=0;k<3;k++)p[i+k]=Math.max(0,Math.min(255,target[k]*shade*strength+p[i+k]*(1-strength)));
-   if(col.cl)p[i+3]=Math.round(a*(col.thin?.72:.88));
- }
- g.putImageData(d,0,0);TINT.set(key,c);return c;
-}
-/* 렌즈/림 레이어 분리: 원본의 저알파 청록 렌즈를 먼저 검출하고, 좌/우 마스크로 보완 */
-const LENS_COLORS=[{k:'clear',n:'무색 투명',c:'#ffffff'},{k:'grey',n:'그레이',c:'#343943'},{k:'brown',n:'브라운',c:'#69452b'},{k:'green',n:'그린',c:'#3a664a'},{k:'blue',n:'블루',c:'#326ba8'},{k:'pink',n:'핑크',c:'#c65a85'},{k:'purple',n:'퍼플',c:'#7652ae'},{k:'yellow',n:'옐로',c:'#d8aa32'},{k:'orange',n:'오렌지',c:'#cf6832'},{k:'black',n:'블랙',c:'#0b0d12'}];
-const LCK=Object.fromEntries(LENS_COLORS.map(x=>[x.k,x]));if(!LCK[lensKey])lensKey='grey';
-const MASK_CACHE=new Map(),LENS_CACHE=new Map();
-function makeLayers(it,base){
- const id=it.mine?it.src:it.id;if(MASK_CACHE.has(id))return MASK_CACHE.get(id);
- const w=base.naturalWidth||base.width,h=base.naturalHeight||base.height;
- const srcCanvas=document.createElement('canvas');srcCanvas.width=w;srcCanvas.height=h;
- const g=srcCanvas.getContext('2d',{willReadFrequently:true});g.drawImage(base,0,0);
- const src=g.getImageData(0,0,w,h),d=src.data,lens=new Uint8Array(w*h),rim=g.createImageData(w,h),rp=rim.data;
- // 기본 프레임의 렌즈는 #AAE1FF 계열 저알파 픽셀로 저장되어 있음.
- // 행 단위 채우기를 제거하고 픽셀별 색상/알파로 렌즈 내부를 분리한다.
- let matched=0;
- for(let q=0,i=0;q<lens.length;q++,i+=4){
-   const a=d[i+3],r=d[i],gg=d[i+1],b=d[i+2];
-   const colorLikeLens=a>0&&a<115&&r>=135&&r<=205&&gg>=190&&gg<=250&&b>=215&&b<=255&&(b-r)>=34&&(gg-r)>=18;
-   if(colorLikeLens){lens[q]=255;matched++}
- }
- // 마스크 가장자리의 부드러운 픽셀만 1px 연결하고, 높은 알파의 프레임 픽셀은 제외한다.
- if(matched>100){
-   const grown=lens.slice();
-   for(let y=1;y<h-1;y++)for(let x=1;x<w-1;x++){
-     const q=y*w+x;if(lens[q])continue;
-     const i=q*4,a=d[i+3],r=d[i],gg=d[i+1],b=d[i+2];
-     if(a>0&&a<95&&r>125&&r<210&&gg>180&&b>205&&b-r>28&&(lens[q-1]||lens[q+1]||lens[q-w]||lens[q+w]))grown[q]=255;
-   }
-   lens.set(grown);
- }
- for(let q=0,i=0;q<lens.length;q++,i+=4){rp[i]=d[i];rp[i+1]=d[i+1];rp[i+2]=d[i+2];rp[i+3]=lens[q]?0:d[i+3]}
- const rimCanvas=document.createElement('canvas');rimCanvas.width=w;rimCanvas.height=h;rimCanvas.getContext('2d').putImageData(rim,0,0);
- const result={rim:rimCanvas,lens,w,h,maskPixels:matched};MASK_CACHE.set(id,result);return result;
-}
-function renderLensAndRim(it,base){
- const key=[it.mine?it.src:it.id,colorKey,lensKey,lensDensity,frameDensity].join('|')+'|layers-v4';
- if(LENS_CACHE.has(key))return LENS_CACHE.get(key);
- const {rim,lens,w,h,maskPixels}=makeLayers(it,base),canvas=document.createElement('canvas');canvas.width=w;canvas.height=h;
- const g=canvas.getContext('2d');
- if(lensDensity>0&&lensKey!=='clear'){
-   const data=g.createImageData(w,h),rgba=data.data,rgb=hex2(LCK[lensKey].c),alpha=Math.round(lensDensity*2.55);
-   for(let q=0,i=0;q<lens.length;q++,i+=4)if(lens[q]){rgba[i]=rgb[0];rgba[i+1]=rgb[1];rgba[i+2]=rgb[2];rgba[i+3]=alpha}
-   g.putImageData(data,0,0);
- }
- if(frameDensity>0){const frame=it.mine||!colorKey?rim:tinted(it,rim,colorKey);g.save();g.globalAlpha=frameDensity/100;g.drawImage(frame,0,0);g.restore()}
- if(maskPixels<100&&lensDensity>0&&lensKey!=='clear')console.warn('렌즈 마스크 검출 픽셀이 적습니다:',maskPixels);
- if(LENS_CACHE.size>60)LENS_CACHE.clear();LENS_CACHE.set(key,canvas);return canvas;
-}
-async function drawableOf(it){const base=await ensureBase(it);if(!base)return null;return renderLensAndRim(it,base)}
+function tinted(it,base,ck){const key=it.id+'|'+ck;if(TINT.has(key))return TINT.get(key);
+ const c=document.createElement('canvas'),Wb=c.width=base.naturalWidth,Hb=c.height=base.naturalHeight,g=c.getContext('2d');g.drawImage(base,0,0);
+ const d=g.getImageData(0,0,Wb,Hb),p=d.data,col=CK[ck],hist=new Uint32Array(256);let n=0;
+ for(let i=0;i<p.length;i+=4)if(p[i+3]>150){hist[Math.round(.299*p[i]+.587*p[i+1]+.114*p[i+2])]++;n++}
+ let acc=0,y95=60;for(let v=0;v<256;v++){acc+=hist[v];if(acc>=n*.95){y95=Math.max(v,25);break}}
+ const stops=col.g?col.g.map(hex2):null,solid=col.c&&col.c[0]==='#'?hex2(col.c):[226,238,248],am=col.cl?(col.thin?.3:.55):1;
+ for(let y=0,i=0;y<Hb;y++)for(let x=0;x<Wb;x++,i+=4){const a=p[i+3];if(!a)continue;
+  const Y=.299*p[i]+.587*p[i+1]+.114*p[i+2],sh=Math.min(1.3,Y/y95);let t=solid;
+  if(stops){const u=Math.min(.999,x/Wb*.75+y/Hb*.25)*(stops.length-1),j=u|0,q=u-j;t=[0,1,2].map(k=>stops[j][k]*(1-q)+stops[j+1][k]*q)}
+  const f=col.cl?.8+.2*sh:.5+.6*sh;p[i]=Math.min(255,t[0]*f);p[i+1]=Math.min(255,t[1]*f);p[i+2]=Math.min(255,t[2]*f);p[i+3]=a*am}
+ g.putImageData(d,0,0);TINT.set(key,c);return c}
+async function drawableOf(it){const base=await ensureBase(it);if(!base)return null;return(it.mine||!colorKey)?base:tinted(it,base,colorKey)}
 const nameOf=it=>it.mine?it.name:it.name+(colorKey?' → '+CK[colorKey].n:'');
 const tempCol=it=>{if(!it)return'#222';if(colorKey&&!it.mine){const c=CK[colorKey];return c.g?c.g[0]:(c.c[0]==='#'?c.c:'#dde8f0')}return it.tc||'#222'};
 const GOPT=[['all','모양 전체'],['rec','★ 추천(얼굴형 기준)'],['round','라운드'],['oval','오벌'],['boston','보스턴'],['wellington','웰링턴'],['square','스퀘어'],['crown','크라운 판토'],['cat','캣아이'],['aviator','에비에이터'],['poly','다각형']];
@@ -526,56 +255,10 @@ async function render(){const tok=++rtok,r=$('rail');
  GL=dr[v.indexOf(sel)]||null;$('cap').textContent=nameOf(items[sel])+(items[sel].mine&&colorKey?' (내 이미지는 색상 변경 불가)':'');refresh();
  const c=r.children[v.indexOf(sel)];if(c)r.scrollTo({left:c.offsetLeft-r.clientWidth/2+c.offsetWidth/2,behavior:'smooth'})}
 $('bPrev').onclick=()=>$('rail').scrollBy({left:-240,behavior:'smooth'});$('bNext').onclick=()=>$('rail').scrollBy({left:240,behavior:'smooth'});
-/* 컬러별 앙증맞은 마스코트 스와치 */
-function mascotButton(k,label,color,group,handler,extraClass=''){
- const b=document.createElement('button');b.type='button';b.className='swb';b.dataset.k=k;b.title=label;b.setAttribute('role','radio');b.setAttribute('aria-label',label);
- const face=document.createElement('span');face.className='color-mascot '+extraClass;face.style.setProperty('--mascot',color);face.setAttribute('aria-hidden','true');
- const mouth=document.createElement('b'),cheeks=document.createElement('em');face.append(mouth,cheeks);
- const text=document.createElement('small');text.textContent=label;b.append(face,text);b.onclick=handler;group.appendChild(b);return b;
-}
-(()=>{const sw=$('sw');
- mascotButton('', '기본 색상', 'linear-gradient(135deg,#d8d2e8,#77718d)',sw,()=>setColor(null),'is-clear');
- COLORS.forEach(c=>{const paint=c.g?`linear-gradient(135deg,${c.g.join(',')})`:c.c;mascotButton(c.k,c.n,paint,sw,()=>setColor(c.k),c.cl?'is-clear':'')});
-})();
+/* 색상 이모티콘 */
+(()=>{const sw=$('sw');const mkb=(k,e,n)=>{const b=document.createElement('button');b.type='button';b.className='swb';b.dataset.k=k;b.textContent=e;b.title=n;b.setAttribute('role','radio');b.setAttribute('aria-label',n);b.onclick=()=>setColor(k||null);sw.appendChild(b)};
+ mkb('','↺','기본 색상');COLORS.forEach(c=>mkb(c.k,c.e,c.n))})();
 function setColor(k){colorKey=k;SVg('gf-color',k);document.querySelectorAll('#sw .swb').forEach(b=>b.setAttribute('aria-checked',(b.dataset.k||null)===(k||null)));$('swName').textContent=k?'색상: '+CK[k].n:'색상: 기본 (프레임 고유 색)';render()}
-/* 렌즈 컬러도 해당 컬러를 몸색으로 한 캐릭터로 표시 */
-(()=>{const sw=$('lensSw');LENS_COLORS.forEach(c=>{
- const paint=c.k==='clear'?'linear-gradient(135deg,#fff,#bdeaff,#f2e7ff)':c.c;
- mascotButton(c.k,c.n,paint,sw,()=>{lensKey=c.k;SVg('gf-lens-color-v4',lensKey);syncLens();render()},c.k==='clear'?'is-clear':'');
- })})();
-function syncLens(){$('lensDensity').value=lensDensity;$('lensDensityOut').textContent=lensDensity+'%';$('frameDensity').value=frameDensity;$('frameDensityOut').textContent=frameDensity+'%';$('lensName').textContent='렌즈 색상: '+LCK[lensKey].n;document.querySelectorAll('#lensSw .swb').forEach(b=>b.setAttribute('aria-checked',b.dataset.k===lensKey))}
-$('lensDensity').oninput=e=>{lensDensity=+e.target.value;SVg('gf-lens-density-v4',lensDensity);syncLens();render()};
-$('frameDensity').oninput=e=>{frameDensity=+e.target.value;SVg('gf-frame-density-v4',frameDensity);syncLens();render()};
-function setPersonZoom(z){personZoom=Math.max(.6,Math.min(2,Math.round(z*20)/20));SVg('gf-person-zoom',personZoom);document.documentElement.style.setProperty('--person-zoom',personZoom);$('personZoom').value=Math.round(personZoom*100);$('personOut').textContent=Math.round(personZoom*100)+'%'}
-$('personZoom').oninput=e=>setPersonZoom(+e.target.value/100);$('personMinus').onclick=()=>setPersonZoom(personZoom-.05);$('personPlus').onclick=()=>setPersonZoom(personZoom+.05);$('personReset').onclick=()=>setPersonZoom(1);
-function syncFitY(){$('fitY').value=fitYOffset;$('fitYOut').textContent=(fitYOffset>0?'+':'')+fitYOffset+'%';$('fitPartName').textContent='정면부 수직 위치 변경';$('earTrack').checked=earTrack;}
-function setFitY(v){fitYOffset=Math.max(-20,Math.min(20,Math.round(v)));SVg('gf-fit-y-v4',fitYOffset);syncFitY();refresh()}
-$('fitY').oninput=e=>setFitY(+e.target.value);$('fitYReset').onclick=()=>setFitY(0);$('fitYUp').onclick=()=>setFitY(fitYOffset-1);$('fitYDown').onclick=()=>setFitY(fitYOffset+1);
-function syncTempleAngle(){$('templeAngle').value=templeAngle;$('templeAngleOut').textContent=(templeAngle>0?'+':'')+templeAngle+'°';}
-function setTempleAngle(value){templeAngle=Math.max(-35,Math.min(35,Math.round(Number(value)||0)));syncTempleAngle();SVg('gf-temple-angle-v10',templeAngle);refresh()}
-$('templeAngle').addEventListener('input',e=>setTempleAngle(e.target.value));
-$('templeAngleReset').addEventListener('click',()=>setTempleAngle(0));
-function syncTempleVertical(){
- $('templeVertical').value=templeVertical;
- $('templeVerticalOut').textContent=(templeVertical>0?'+':'')+templeVertical+'%';
- $('templeVertical').setAttribute('aria-valuetext',templeVertical===0?'기본 위치':Math.abs(templeVertical)+'% '+(templeVertical<0?'위로':'아래로'));
- const preview=$('templePreviewArm');if(preview)preview.style.transform='rotate('+Math.round(templeVertical*.58)+'deg)';
-}
-function setTempleVertical(value){templeVertical=Math.max(-40,Math.min(40,Math.round(Number(value)||0)));syncTempleVertical();SVg('gf-temple-vertical-v11',templeVertical);refresh()}
-$('templeVertical').addEventListener('input',e=>setTempleVertical(e.target.value));
-$('templeVerticalUp').addEventListener('click',()=>setTempleVertical(templeVertical-1));
-$('templeVerticalDown').addEventListener('click',()=>setTempleVertical(templeVertical+1));
-$('templeVerticalReset').addEventListener('click',()=>setTempleVertical(0));
-syncTempleAngle();
-syncTempleVertical();
-const manualKeys=['x','y','yaw','w'];
-function syncManual(){manualKeys.forEach(k=>{const id='manual'+k.charAt(0).toUpperCase()+k.slice(1);$(id).value=manualFit[k];$(id+'Out').textContent=manualFit[k]+(k==='yaw'?'°':'%')});$('manualPanel').hidden=!manualMode;$('bManual').textContent=manualMode?'자동 인식으로 전환':'오프라인 수동 피팅'}
-manualKeys.forEach(k=>{$('manual'+k.charAt(0).toUpperCase()+k.slice(1)).oninput=e=>{manualFit[k]=+e.target.value;syncManual();refresh()}});
-$('bManual').onclick=()=>{manualMode=!manualMode;syncManual();refresh();toast(manualMode?'사진을 선택하면 인터넷 없이 위치를 직접 맞출 수 있습니다.':'자동 얼굴 인식 모드로 전환했습니다.')};
-$('bManualReset').onclick=()=>{manualFit={x:50,y:38,yaw:0,w:54};syncManual();refresh()};
-$('cv').addEventListener('pointerdown',e=>{if(!manualMode||!stillData)return;const r=$('cv').getBoundingClientRect();manualFit.x=Math.round((e.clientX-r.left)/r.width*100);manualFit.y=Math.round((e.clientY-r.top)/r.height*100);syncManual();refresh()});
-syncManual();
-$('earTrack').onchange=e=>{earTrack=e.target.checked;SVg('gf-ear-track',earTrack);refresh()};
 /* 크기 */
 function setZoom(z){zoom=Math.min(1.6,Math.max(.6,Math.round(z*20)/20));SVg('gf-zoom',zoom);$('zm').value=Math.round(zoom*100);$('zOut').textContent=Math.round(zoom*100)+'%';refresh()}
 $('zm').oninput=e=>setZoom(e.target.value/100);$('zMinus').onclick=()=>setZoom(zoom-.05);$('zPlus').onclick=()=>setZoom(zoom+.05);$('zReset').onclick=()=>setZoom(1);
@@ -652,7 +335,7 @@ async function saveToServer(){if(!/^https?:$/.test(location.protocol))return fal
 async function cacheAll(){try{const c=await caches.open('gf-v2');await c.addAll(Object.values(CDN_FILES));return true}catch(e){return false}}
 const vid=$('cam'),cv=$('cv'),ctx=cv.getContext('2d');const buf=[];let W=640,H=480,lm=null,du=null,FL=null,front=true,stream=null,lastT=-1,S=null,tAn=0,aiP=null,looping=false;
 function ensureAI(){if(lm)return Promise.resolve(true);if(aiP)return aiP;
- aiP=(async()=>{pill('pAI','AI 불러오는 중…','wait');try{const B=await pickBase();if(B.net&&!navigator.onLine)throw new Error('오프라인 모델 미설치');if(B.net)toast('AI 모델 다운로드 중… (최초 1회)',6000);
+ aiP=(async()=>{pill('pAI','AI 불러오는 중…','wait');try{const B=await pickBase();if(B.net)toast('이 기기의 인터넷으로 AI 모델을 내려받는 중… (최초 1회, 약 15MB)',6000);
   const m=await import(B.b+'/vision_bundle.mjs');FL=m.FaceLandmarker;const fsr=await m.FilesetResolver.forVisionTasks(B.b+'/wasm');
   const mkL=d=>FL.createFromOptions(fsr,{baseOptions:{modelAssetPath:B.m,delegate:d},runningMode:'VIDEO',numFaces:1});
   try{lm=await mkL('GPU')}catch(e){lm=await mkL('CPU')}du=new m.DrawingUtils(ctx);pill('pAI','AI 준비됨','ok');
@@ -668,115 +351,28 @@ function startLoop(){if(!looping){looping=true;requestAnimationFrame(tick)}}
 async function startCam(){
  try{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('insecure');await cam();still=false;stillData=null;$('bLive').hidden=true;$('empty').hidden=true}
  catch(e){pill('pCam','카메라 사용 불가','err');$('emsg').textContent=navigator.mediaDevices?'카메라 권한을 허용해 주세요. 막혀 있다면 갤러리 또는 촬영 버튼을 쓰세요.':'이 주소(http)에서는 실시간 카메라를 켤 수 없어요. 촬영·갤러리 버튼을 쓰거나 https 로 접속하세요.';toast($('emsg').textContent,5000);return}
- if(await ensureAI())startLoop();else{manualMode=true;syncManual();toast('AI 모델 없음: 카메라 영상은 표시되며 사진 수동 피팅은 오프라인으로 이용할 수 있습니다.',6000)}}
+ if(await ensureAI())startLoop()}
 $('bStart').onclick=startCam;$('bFlip').onclick=()=>{front=!front;startCam()};
 const P=(l,i)=>({x:l[i].x*W,y:l[i].y*H});
 const irisLines=l=>{du.drawConnectors(l,FL.FACE_LANDMARKS_RIGHT_IRIS,{color:'#ff2bd6',lineWidth:1.5});du.drawConnectors(l,FL.FACE_LANDMARKS_LEFT_IRIS,{color:'#ff2bd6',lineWidth:1.5})};
 /* 각도에 맞춘 안경 그리기: 세로 띠로 나눠 원근 변환(좌우 회전) + 상하 기울기 + 보이는 쪽 안경다리 */
 const oc=document.createElement('canvas'),ox=oc.getContext('2d');
-/* 외부 귀 랜드마크 추정기가 있으면 연결: window.GlassFitEarProvider.estimate({landmarks,width,height,side})
-   반환: {x,y,confidence} 이미지 픽셀 좌표. 제공되지 않으면 FaceMesh 3D 기반 근사로 복귀. */
-function estimateEar(l,side){
- const adapter=window.GlassFitEarProvider;
- if(adapter&&typeof adapter.estimate==='function'){
-  try{const r=adapter.estimate({landmarks:l,width:W,height:H,side});
-   if(r&&Number.isFinite(r.x)&&Number.isFinite(r.y)&&r.confidence>=.5)return {...r,source:'detector'}}catch(e){console.warn('ear provider',e)}
- }
- const temple=l[side<0?127:356],outer=l[side<0?234:454],upper=l[side<0?162:389];
- // 정규화된 3D 상대 깊이와 관자놀이-측면 차이를 이용해 귀 상부 방향으로 확장.
- const faceWidth=Math.max(10,Math.abs(l[454].x-l[234].x)*W);
- const x=(temple.x*.72+outer.x*.28)*W+side*faceWidth*.075;
- const y=(temple.y*.75+upper.y*.25)*H-faceWidth*.03;
- return {x,y,confidence:.25,source:'estimated'};
-}
-
 function drawGlasses(l){const it=items[sel];if(!it||!GL||!S)return;
- const iw=GL.naturalWidth||GL.width,ih=GL.naturalHeight||GL.height,w=S.w*zoom,h=w*ih/iw,F=Math.max(W,H)*1.15,NS=Math.max(20,Math.min(72,Math.round(w/5)));
- const sy=Math.sin(S.yaw),cyw=Math.cos(S.yaw),vp=Math.max(.6,Math.cos(S.pitch*.8));
- const bw=Math.ceil(w*1.5)+4,bh=Math.ceil(h*1.5)+4;if(oc.width<bw||oc.height<bh){oc.width=Math.max(oc.width,bw);oc.height=Math.max(oc.height,bh)}
+ const iw=GL.naturalWidth||GL.width,ih=GL.naturalHeight||GL.height,w=S.w*zoom,h=w*ih/iw,F=Math.max(W,H)*1.15,NS=Math.max(16,Math.min(48,Math.round(w/6)));
+ const sy=Math.sin(S.yaw),cyw=Math.cos(S.yaw),vp=Math.max(.6,Math.cos(S.pitch*.8)),cr=Math.cos(S.roll),sr=Math.sin(S.roll);
+ const bw=Math.ceil(w*1.25)+4,bh=Math.ceil(h*1.25)+4;if(oc.width<bw||oc.height<bh){oc.width=Math.max(oc.width,bw);oc.height=Math.max(oc.height,bh)}
  ox.clearRect(0,0,oc.width,oc.height);const cx=Math.round(oc.width/2),cy=Math.round(oc.height/2);
- if(Math.abs(S.yaw)<.16){ox.imageSmoothingEnabled=true;ox.imageSmoothingQuality='high';ox.drawImage(GL,cx-w/2,cy-h*vp/2,w,h*vp)}
- else for(let k=0;k<NS;k++){const x0=(k/NS-.5)*w,x1=((k+1)/NS-.5)*w,s0=F/(F+x0*sy),s1=F/(F+x1*sy),X0=cx+x0*cyw*s0,X1=cx+x1*cyw*s1,hh=h*vp*(s0+s1)/2;
-  ox.imageSmoothingEnabled=true;ox.imageSmoothingQuality='high';
-   const srcX=k*iw/NS,srcW=Math.min(iw-srcX,iw/NS+1.2),dw=X1-X0;
-   if(dw>0)ox.drawImage(GL,srcX,0,srcW,ih,X0,cy-hh/2,Math.max(1,dw+1.15),hh)}
- ctx.save();ctx.translate(S.x,S.y);ctx.rotate(S.roll);
- /* 템플/귀 연결: 234·454는 뺨 좌표이므로 사용하지 않고 귀 쪽의 127·356
-    머리 측면 랜드마크를 기준으로 안경다리 끝을 추정합니다. 실제 귀 검출은 별도 모델 필요. */
- const ay=Math.abs(S.yaw),cr=Math.cos(S.roll),sr=Math.sin(S.roll);
- if(earTrack&&ay>.075){
-   // 모든 좌표는 영상 원본 좌표계입니다. 좌/우 랜드마크 번호는
-   // 셀피 미러에서 화면 좌우와 다르므로, 실제 x 좌표로 화면 쪽을 재판정합니다.
-   const ears=[];
-   if(l){
-     for(const faceSide of [-1,1]){
-       const ear=estimateEar(l,faceSide);
-       if(!Number.isFinite(ear.x)||!Number.isFinite(ear.y))continue;
-       const dx=ear.x-S.x,dy=ear.y-S.y;
-       const localX=dx*cr+dy*sr,localY=-dx*sr+dy*cr;
-       const imageSide=localX<0?-1:1;
-       // 엉뚱한 쪽 랜드마크가 교차할 경우에는 그 다리를 그리지 않습니다.
-       if(Math.abs(localX)<w*.27)continue;
-       const normalized=(Math.abs(localX)-w*.46)/Math.max(1,w);
-       ears.push({faceSide,imageSide,x:localX,y:localY,score:normalized,confidence:ear.confidence||0});
-     }
-   }
-   // 앞쪽으로 튀어나온 먼쪽 다리를 제거: 최대 한쪽만 보여줍니다.
-   // 실제 귀 후보가 있다면, 화면의 정면부 바깥쪽에 가장 잘 위치한 귀를 선택합니다.
-   ears.sort((a,b)=>b.score-a.score);
-   const best=ears.find(e=>e.score>-.05);
-   const visibleSide=best?best.imageSide:(S.yaw>0?1:-1);
-   const sx=visibleSide*w*.49;
-   const projection=F/(F+sx*sy);
-   const hingeX=sx*cyw*projection;
-   const hingeY=-h*vp*.055;
-   let targetX,targetY;
-   if(best){
-     const outward=Math.max(w*.13,Math.abs(best.x)-Math.abs(hingeX));
-     targetX=hingeX+visibleSide*Math.min(w*.44,outward);
-     targetY=Math.max(hingeY-h*.3,Math.min(hingeY+h*.18,best.y-h*.04));
-   }else{
-     targetX=hingeX+visibleSide*w*.23;
-     targetY=hingeY-h*.075;
-   }
-   targetY += (templeVertical*S.w/100);
-   // 다리 각도 조절: 경첩을 중심으로 다리의 진행 벡터를 회전합니다.
-   let vx=targetX-hingeX, vy=targetY-hingeY;
-   const ang=templeAngle*Math.PI/180, ca=Math.cos(ang), sa=Math.sin(ang);
-   let rvx=vx*ca-vy*sa, rvy=vx*sa+vy*ca;
-   // 반대쪽으로 넘어가지 않도록 바깥쪽 진행 방향을 강제합니다.
-   const minOut=w*.07;
-   if(visibleSide*rvx<minOut) rvx=visibleSide*minOut;
-   targetX=hingeX+rvx; targetY=hingeY+rvy;
-   // 힌지-다리 곡선이 안경 렌즈 영역을 역주행하지 않게 안전 제약.
-   const length=visibleSide*(targetX-hingeX);
-   if(length>w*.045){
-     const joinOverlap=Math.max(1.2,w*.008);
-     const startX=hingeX-visibleSide*joinOverlap; // 미세 겹침으로 정면부와 다리가 끊어져 보이지 않게 함
-     ctx.save();
-     ctx.globalAlpha=Math.min(1,Math.max(0,(ay-.075)*4))*(frameDensity/100);
-     ctx.strokeStyle=tempCol(it);ctx.fillStyle=tempCol(it);ctx.lineWidth=Math.max(2,w*.023);
-     ctx.lineCap='round';ctx.lineJoin='round';
-     ctx.beginPath();ctx.moveTo(startX,hingeY);
-     ctx.bezierCurveTo(hingeX+visibleSide*length*.24,hingeY-h*.035,
-                       targetX-visibleSide*length*.22,targetY-h*.03,targetX,targetY);
-     ctx.stroke();
-     // 연결부를 한 번 더 메워 미세한 틈을 방지
-     ctx.beginPath();ctx.arc(hingeX,hingeY,ctx.lineWidth*.46,0,Math.PI*2);ctx.fill();
-     ctx.beginPath();ctx.moveTo(targetX,targetY);
-     ctx.quadraticCurveTo(targetX+visibleSide*w*.02,targetY+h*.015,
-                          targetX+visibleSide*w*.022,targetY+h*.07);
-     ctx.stroke();ctx.restore();
-   }
- }
- ctx.globalAlpha=it.mine?frameDensity/100:1;ctx.drawImage(oc,0,0,oc.width,oc.height,-cx,-cy,oc.width,oc.height);ctx.restore()}
-
+ for(let k=0;k<NS;k++){const x0=(k/NS-.5)*w,x1=((k+1)/NS-.5)*w,s0=F/(F+x0*sy),s1=F/(F+x1*sy),X0=cx+Math.round(x0*cyw*s0),X1=cx+Math.round(x1*cyw*s1),hh=h*vp*(s0+s1)/2;
+  ox.drawImage(GL,k*iw/NS,0,iw/NS,ih,X0,Math.round(cy-hh/2),Math.max(1,X1-X0),Math.round(hh))}
+ ctx.save();ctx.translate(S.x,S.y);ctx.rotate(S.roll);ctx.drawImage(oc,0,0,oc.width,oc.height,-cx,-cy,oc.width,oc.height);
+ const ay=Math.abs(S.yaw);
+ if(ay>.14){const side=S.yaw>0?-1:1,e=P(l,side<0?234:454),dx=e.x-S.x,dy=e.y-S.y,lx=dx*cr+dy*sr,ly=-dx*sr+dy*cr,sE=F/(F+side*w/2*sy),ex=side*(w/2)*cyw*sE;
+  ctx.globalAlpha=Math.min(1,(ay-.14)/.2);ctx.strokeStyle=tempCol(it);ctx.lineWidth=Math.max(2,w*.028);ctx.lineCap='round';ctx.beginPath();ctx.moveTo(ex,-h*vp*.12);ctx.lineTo(lx+side*w*.03,ly);ctx.stroke()}
+ ctx.restore()}
 function paint(l,mode){
  if(du){if(lineMode==='all'){du.drawConnectors(l,FL.FACE_LANDMARKS_TESSELATION,{color:'rgba(25,227,255,.35)',lineWidth:.6});irisLines(l)}else if(lineMode==='contour')du.drawConnectors(l,FL.FACE_LANDMARKS_CONTOURS,{color:'rgba(25,227,255,.85)',lineWidth:1.2});else if(lineMode==='iris')irisLines(l)}
  const ps=pose(l,W,H),a=P(l,468),b=P(l,473);
- const eyeSpan=d3(l,468,473,W,H),autoY=(a.y+b.y)/2;
- // 기존 자동 배치 기준으로 복귀: 양쪽 홍채 중심의 중간값. 높이 슬라이더만 상대 오프셋을 더한다.
- const t={x:(a.x+b.x)/2,y:autoY+eyeSpan*(fitYOffset/100),w:eyeSpan*((items[sel]&&items[sel].k)||2.2),roll:ps.roll,yaw:ps.yaw,pitch:ps.pitch};
+ const t={x:(a.x+b.x)/2,y:(a.y+b.y)/2,w:d3(l,468,473,W,H)*((items[sel]&&items[sel].k)||2.2),roll:ps.roll,yaw:ps.yaw,pitch:ps.pitch};
  S=S?Object.fromEntries(Object.keys(t).map(k=>[k,S[k]+(t[k]-S[k])*.55])):t;drawGlasses(l);
  if(mode===2||!runAI)return;
  const f=feats(l,W,H),fi=FIdx(l,W,H);
@@ -788,26 +384,22 @@ function tick(){requestAnimationFrame(tick);if(still||!lm||vid.readyState<2||vid
  const r=lm.detectForVideo(vid,performance.now());ctx.clearRect(0,0,W,H);
  if(!r.faceLandmarks.length){S=null;buf.length=0;$('hShape').textContent='얼굴을 화면에 맞춰 주세요';$('hConf').textContent='';return}
  paint(r.faceLandmarks[0],0)}
-function manualPose(){return {x:W*manualFit.x/100,y:H*manualFit.y/100+W*manualFit.w/100*(fitYOffset/100),w:W*manualFit.w/100/zoom,roll:0,yaw:manualFit.yaw*Math.PI/180,pitch:0}}
-function redrawStill(){if(!stillData)return;ctx.clearRect(0,0,W,H);ctx.drawImage(stillData.img,0,0,W,H);S=null;
- if(manualMode||!stillData.l){S=manualPose();drawGlasses(null)}else paint(stillData.l,2)}
+function redrawStill(){if(!stillData)return;ctx.clearRect(0,0,W,H);ctx.drawImage(stillData.img,0,0,W,H);S=null;paint(stillData.l,2)}
 const refresh=()=>{if(still&&stillData)redrawStill()};
+/* 사진(갤러리·카메라 앱) */
 async function shot(file){if(!file)return;if(!/^image\//.test(file.type)){toast('이미지 파일을 선택해 주세요');return}
+ if(!await ensureAI())return;
  const img=new Image(),u=URL.createObjectURL(file);img.src=u;try{await img.decode()}catch(e){URL.revokeObjectURL(u);toast('사진을 읽지 못했어요 (HEIC는 JPG·PNG로 변환)',4500);return}
  const k=Math.min(1,1280/Math.max(img.naturalWidth,img.naturalHeight));W=cv.width=Math.round(img.naturalWidth*k);H=cv.height=Math.round(img.naturalHeight*k);
  still=true;$('view').classList.remove('mir');$('bLive').hidden=false;$('empty').hidden=true;
- stillData={img,l:null};S=null;buf.length=0;
- if(!manualMode&&await ensureAI()){
-  try{await lm.setOptions({runningMode:'IMAGE'});const r=lm.detect(img);await lm.setOptions({runningMode:'VIDEO'});stillData.l=r.faceLandmarks[0]||null}
-  catch(e){console.warn('image AI failed',e)}
- }
- if(!stillData.l){manualMode=true;syncManual();toast('AI 사용 불가: 인터넷 없이 수동 사진 피팅으로 전환했습니다.',5000)}
- redrawStill();if(stillData.l&&!manualMode)paint(stillData.l,1);
-}
+ let r;try{await lm.setOptions({runningMode:'IMAGE'});r=lm.detect(img);await lm.setOptions({runningMode:'VIDEO'})}catch(e){toast('분석 중 오류가 났어요');return}
+ stillData=r.faceLandmarks.length?{img,l:r.faceLandmarks[0]}:null;ctx.clearRect(0,0,W,H);ctx.drawImage(img,0,0,W,H);S=null;buf.length=0;
+ if(!stillData){$('hShape').textContent='얼굴을 찾지 못했어요';$('hConf').textContent='';toast('정면 사진으로 다시 선택해 주세요');return}
+ paint(stillData.l,1)}
 $('bShot').onclick=()=>$('shotIn').click();$('shotIn').onchange=e=>{const f=e.target.files[0];e.target.value='';shot(f)};
 const pickGal=()=>$('galIn').click();$('bGal').onclick=pickGal;$('bGal2').onclick=pickGal;$('galIn').onchange=e=>{const f=e.target.files[0];e.target.value='';shot(f)};
 $('bLive').onclick=async()=>{still=false;stillData=null;S=null;$('bLive').hidden=true;
  if(stream&&stream.active){$('view').classList.toggle('mir',front);W=cv.width=vid.videoWidth;H=cv.height=vid.videoHeight;startLoop()}else await startCam()};
 /* 초기화 */
-syncFitY();syncLens();setPersonZoom(personZoom);setLines(lineMode);setColor(colorKey);setZoom(zoom);applyAR();applyHide();showLearn();showGuide(0);gAuto=true;render();
+setLines(lineMode);setColor(colorKey);setZoom(zoom);applyAR();applyHide();showLearn();showGuide(0);gAuto=true;render();
 </script></body></html>
