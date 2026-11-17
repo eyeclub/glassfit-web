@@ -1,10 +1,11 @@
+
 {
-  "name": "GLASS//FIT · AR 안경 가상 피팅",
+  "id": "/glassfit-web/",
+  "name": "GLASS//FIT AR 안경 가상 피팅",
   "short_name": "GLASS//FIT",
-  "description": "GLASS//FIT 안경 가상 피팅",
-  "lang": "ko",
-  "start_url": "./static/GlassFit.html",
-  "scope": "./",
+  "description": "GLASS//FIT 안경 가상 피팅 시스템",
+  "start_url": "./static/GlassFit_아이콘적용_완성.html",
+  "scope": "/glassfit-web/",
   "display": "standalone",
   "background_color": "#07031a",
   "theme_color": "#07031a",
@@ -19,7 +20,7 @@
       "src": "./icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     }
   ]
 }
